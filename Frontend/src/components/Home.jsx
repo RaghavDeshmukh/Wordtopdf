@@ -17,10 +17,11 @@ function Home() {
       return;
     }
     const formData = new FormData();
+    console.log(formData);
     formData.append("file", selectedFile);
     try {
       const response = await axios.post(
-        "http://localhost:3000/convertFile",
+        "https://wordtopdf-e5qw.onrender.com",
         formData,
         {
           responseType: "blob",
