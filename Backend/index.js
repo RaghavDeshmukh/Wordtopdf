@@ -8,7 +8,9 @@ const app = express();
 const port = 3000;
 
 app.use(cors({
-  origin: 'https://wordtopdf-one.vercel.app/' // your Vercel domain
+  origin: 'https://wordtopdf-one.vercel.app', // your frontend domain
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type']
 }));
 
 // settting up the file storage
@@ -22,7 +24,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-app.post("https://wordtopdf-e5qw.onrender.com/convertFile", upload.single("file"), (req, res, next) => {
+app.post("/convertFile", upload.single("file"), (req, res, next) => {
     try {
         if (!req.file) {
             return res.status(400).json({
